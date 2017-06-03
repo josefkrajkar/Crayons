@@ -7,7 +7,7 @@ React library for "Paintbrush" component.
 [It is alive! :)](http://krajkar-tests.surge.sh/)
 
 TODO list:
-- upload the proper repository for easier cloning and testing
+- upload the proper repository for easier cloning and testing - Done :)
 - draw lines instead of small squares and compare the results with the current output
 - implement pallete with colors (10 colors max)
 - implement tool for chosing the size of paintbrush (1px - 5px)

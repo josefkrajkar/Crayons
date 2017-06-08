@@ -33,7 +33,6 @@ body {
     position: absolute;
     top: 400px;
     left: 30px;
-    cursor: pointer;
 }
 .platno {
     width: 90%;
@@ -44,4 +43,12 @@ body {
     left: 30px;
     background: white;
     cursor: crosshair;
+}
+.newbtn {
+    cursor: pointer;
+}
+.clrbtn {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
 }

@@ -14,11 +14,18 @@ import './crayons.css';
     function Stin() {
         return <div className="shadow"/>;
     }
-/*
-    function Clr_Btn(props) {
-      return <button type="button" onClick={props.onClick}>New</button>
+
+    function Newbtn(props) {
+      return <button className="newbtn" type="button" onClick={props.onClick}>New</button>
     }
-*/
+
+    function Clrbtn(props) {
+        let barva = {
+            background: 'blue',
+        }
+        return <button style={barva} className="clrbtn" onClick={props.onClick} type="button"/>
+    }
+
     function Menu(props) {
         return <div className="menu">{props.children}</div>;
     }
@@ -28,37 +35,66 @@ import './crayons.css';
             super();
             this.state= {
                 drawing: false,
+                context: {},
+                rect: {},
+                canvas: {},
+                color: 'black',
+            }
+        }
+
+        componentDidMount() {
+            let canvas = document.getElementById("canvas1");
+            if (this.state.canvas != null) {
+                this.setState({
+                    canvas: canvas,
+                    context: canvas.getContext('2d'),
+                    rect: canvas.getBoundingClientRect(),
+                });
             }
         }
 
         handleMove(e) {
             if (this.state.drawing) {
-             let rect = e.target.getBoundingClientRect();
-             let ctx = e.target.getContext('2d');
-             let x = Math.floor((e.clientX-rect.left)/(rect.right-rect.left)*e.target.width);
-             let y = Math.floor((e.clientY-rect.top)/(rect.bottom-rect.top)*e.target.height);
-             ctx.fillRect(x,y,1,1);
-              //  ctx.fillRect(x,y,rect.width,rect.height);
+                let x = Math.floor((e.clientX-this.state.rect.left)/(this.state.rect.right-this.state.rect.left)*e.target.width),
+                    y = Math.floor((e.clientY-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*e.target.height);
+                let context = this.state.context;
+                context.strokeStyle = this.state.color;
+                //context.lineWidth = 3.0;
+                context.lineTo(x,y);
+                context.stroke();
             }
         }
 
         handleClick(e) {
+            let context = this.state.context;
             this.setState({
                 drawing: true,
-            })
+            });
+            let x = Math.floor((e.clientX-this.state.rect.left)/(this.state.rect.right-this.state.rect.left)*e.target.width),
+                y = Math.floor((e.clientY-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*e.target.height);        
+            context.moveTo(x,y);
+            context.beginPath();
+        }
+
+        changeColor() {
+            this.setState({
+                color: 'blue',
+            });
         }
 
         endDraw() {
-            this.setState({
-                drawing: false,
-            })
+            if (this.state.drawing) {
+                let context = this.state.context;
+                this.setState({
+                    drawing: false,
+                });
+                context.stroke();
+            }
         }
 
         newPic() {
-            
-            let canvas = document.getElementById('canvas1');
-            let ctx = canvas.getContext('2d');
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+            let context = this.state.context;
+            context.clearRect(0,0,this.state.canvas.width,this.state.canvas.height);
             
         }
 
@@ -73,7 +109,8 @@ import './crayons.css';
                 </Platno>
                 <Menu>
                     Tools and colors<br/>
-                    <button onClick={() => this.newPic()}>New!</button>
+                    <Newbtn onClick={() => this.newPic()} /><br/>
+                    <Clrbtn onClick={() => this.changeColor()}/>
                 </Menu>
                 </div>;
         }

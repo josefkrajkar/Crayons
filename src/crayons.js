@@ -19,13 +19,6 @@ import './crayons.css';
       return <button className="newbtn" type="button" onClick={props.onClick}>New</button>
     }
 
-    function Clrbtn(props) {
-        let barva = {
-            background: 'blue',
-        }
-        return <button style={barva} className="clrbtn" onClick={props.onClick} type="button"/>
-    }
-
     function Menu(props) {
         return <div className="menu">{props.children}</div>;
     }
@@ -76,9 +69,9 @@ import './crayons.css';
             context.beginPath();
         }
 
-        changeColor() {
+        changeColor(i) {
             this.setState({
-                color: 'blue',
+                color: this.chooseColor(i),
             });
         }
 
@@ -98,6 +91,18 @@ import './crayons.css';
             
         }
 
+        chooseColor(i) {
+            const colors = ['black','white','grey','blue','green','red','brown','yellow','orange','purple'];
+            return colors[i];
+        }
+
+        renderClrBtn(i) {
+            let btnStyle = {
+                background: this.chooseColor(i),
+            };
+            return <button type='button' className='clrbtn' onClick={() => this.changeColor(i)} style={btnStyle}/>
+        }
+
         render() {
             return <div className="area"><Stin/><Platno
                 id="canvas1"
@@ -109,8 +114,17 @@ import './crayons.css';
                 </Platno>
                 <Menu>
                     Tools and colors<br/>
-                    <Newbtn onClick={() => this.newPic()} /><br/>
-                    <Clrbtn onClick={() => this.changeColor()}/>
+                    <Newbtn onClick={() => this.newPic()} /><br/>           
+                {this.renderClrBtn(0)}
+                {this.renderClrBtn(1)}
+                {this.renderClrBtn(2)}
+                {this.renderClrBtn(3)}
+                {this.renderClrBtn(4)}
+                {this.renderClrBtn(5)}
+                {this.renderClrBtn(6)}
+                {this.renderClrBtn(7)}
+                {this.renderClrBtn(8)}
+                {this.renderClrBtn(9)}
                 </Menu>
                 </div>;
         }

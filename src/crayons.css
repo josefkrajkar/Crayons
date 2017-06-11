@@ -52,3 +52,39 @@ body {
     height: 25px;
     width: 25px;
 }
+.colors {
+    padding: 3px;
+    width: 185px;
+    border: 1px solid #999;
+    position: absolute;
+    top: 3px;
+    left: 343px;
+}
+.palette {
+    padding: 0px;
+}
+.outerSquare {
+    border: 1px solid #999;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 0px;
+    left: 5px;
+}
+.innerSquare {
+    border: 1px solid #999;
+    width: 24px;
+    height: 24px;
+    background: black;
+    align-content: center;
+    left: 2px;
+    top: 2px;
+    position: absolute;
+}
+.colorText {
+    padding: 0;
+    margin: 0;
+    cursor: default;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}

@@ -103,6 +103,13 @@ import './crayons.css';
             return <button type='button' className='clrbtn' onClick={() => this.changeColor(i)} style={btnStyle}/>
         }
 
+        renderInnerSquare() {
+            let squareStyle = {
+                background: this.state.color,
+            }
+            return <div style={squareStyle} className="innerSquare"/>;
+        }
+
         render() {
             return <div className="area"><Stin/><Platno
                 id="canvas1"
@@ -114,17 +121,34 @@ import './crayons.css';
                 </Platno>
                 <Menu>
                     Tools and colors<br/>
-                    <Newbtn onClick={() => this.newPic()} /><br/>           
-                {this.renderClrBtn(0)}
-                {this.renderClrBtn(1)}
-                {this.renderClrBtn(2)}
-                {this.renderClrBtn(3)}
-                {this.renderClrBtn(4)}
-                {this.renderClrBtn(5)}
-                {this.renderClrBtn(6)}
-                {this.renderClrBtn(7)}
-                {this.renderClrBtn(8)}
-                {this.renderClrBtn(9)}
+                    <Newbtn onClick={() => this.newPic()} />
+                <div className="colors">
+                    <table>
+                        <tr>
+                            <td>
+                                <p className="colorText">Color:</p>
+                                <div className="outerSquare">
+                                    {this.renderInnerSquare()}
+                                </div>
+                            </td>
+                            <td>
+                                <div className="palette">           
+                                    {this.renderClrBtn(0)}
+                                    {this.renderClrBtn(1)}
+                                    {this.renderClrBtn(2)}
+                                    {this.renderClrBtn(3)}
+                                    {this.renderClrBtn(4)}
+                                    <br/>
+                                    {this.renderClrBtn(5)}
+                                    {this.renderClrBtn(6)}
+                                    {this.renderClrBtn(7)}
+                                    {this.renderClrBtn(8)}
+                                    {this.renderClrBtn(9)}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 </Menu>
                 </div>;
         }

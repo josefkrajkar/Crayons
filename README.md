@@ -16,3 +16,4 @@ TODO list:
 - write comments in English
 - use flow
 - write unit tests with jest and enzyme 
+- write proper readme file :)

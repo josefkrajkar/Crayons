@@ -91,3 +91,25 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
 }
+.styleText {
+    padding: 3px;
+    margin: 0;
+    cursor: default;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.style {
+    padding: 5px;
+    width: 130px;
+    height: 50px;
+    border: 1px solid #999;
+    position: absolute;
+    top: 5px;
+    left: 198px;
+}
+.stlBtn {
+    margin: 1px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}

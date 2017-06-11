@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './crayons.css';
 
-
     function Platno(props) {
         return <canvas onMouseDown={props.onMouseDown}
                    onMouseMove={props.onMouseMove}
@@ -32,6 +31,7 @@ import './crayons.css';
                 rect: {},
                 canvas: {},
                 color: 'black',
+                lineWidth: 1,
             }
         }
 
@@ -52,7 +52,7 @@ import './crayons.css';
                     y = Math.floor((e.clientY-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*e.target.height);
                 let context = this.state.context;
                 context.strokeStyle = this.state.color;
-                //context.lineWidth = 3.0;
+                context.lineWidth = this.state.lineWidth;
                 context.lineTo(x,y);
                 context.stroke();
             }
@@ -75,6 +75,12 @@ import './crayons.css';
             });
         }
 
+        changeWidth(i) {
+            this.setState({
+                lineWidth: i,
+            });
+        }
+
         endDraw() {
             if (this.state.drawing) {
                 let context = this.state.context;
@@ -88,7 +94,6 @@ import './crayons.css';
         newPic() {
             let context = this.state.context;
             context.clearRect(0,0,this.state.canvas.width,this.state.canvas.height);
-            
         }
 
         chooseColor(i) {
@@ -101,6 +106,17 @@ import './crayons.css';
                 background: this.chooseColor(i),
             };
             return <button type='button' className='clrbtn' onClick={() => this.changeColor(i)} style={btnStyle}/>
+        }
+
+        renderStlBtn(i) {
+            let btnStyle = {};
+            if (i === this.state.lineWidth) {
+                btnStyle = {
+                    background: 'salmon'
+                }
+            }
+            
+            return <button className='stlBtn' style={btnStyle} type='button' onClick={()=>this.changeWidth(i)}>{i + ' px'}</button>;
         }
 
         renderInnerSquare() {
@@ -122,6 +138,12 @@ import './crayons.css';
                 <Menu>
                     Tools and colors<br/>
                     <Newbtn onClick={() => this.newPic()} />
+                <div className="style">
+                    <p className='styleText'>Line width:</p>
+                    {this.renderStlBtn(1)}
+                    {this.renderStlBtn(3)}
+                    {this.renderStlBtn(5)}
+                </div>
                 <div className="colors">
                                <p className="colorText">Color:</p>
                                 <div className="outerSquare">
@@ -145,6 +167,5 @@ import './crayons.css';
                 </div>;
         }
     }
-
 
 export default Crayons;

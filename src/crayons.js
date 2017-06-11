@@ -123,15 +123,10 @@ import './crayons.css';
                     Tools and colors<br/>
                     <Newbtn onClick={() => this.newPic()} />
                 <div className="colors">
-                    <table>
-                        <tr>
-                            <td>
-                                <p className="colorText">Color:</p>
+                               <p className="colorText">Color:</p>
                                 <div className="outerSquare">
                                     {this.renderInnerSquare()}
                                 </div>
-                            </td>
-                            <td>
                                 <div className="palette">           
                                     {this.renderClrBtn(0)}
                                     {this.renderClrBtn(1)}
@@ -145,9 +140,6 @@ import './crayons.css';
                                     {this.renderClrBtn(8)}
                                     {this.renderClrBtn(9)}
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
                 </Menu>
                 </div>;

@@ -53,15 +53,18 @@ body {
     width: 25px;
 }
 .colors {
-    padding: 3px;
-    width: 185px;
+    padding: 5px;
+    width: 175px;
     border: 1px solid #999;
     position: absolute;
-    top: 3px;
-    left: 343px;
+    top: 5px;
+    left: 345px;
 }
 .palette {
+    top: 3px;
+    left: 50px;
     padding: 0px;
+    position: absolute;
 }
 .outerSquare {
     border: 1px solid #999;

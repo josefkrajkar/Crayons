@@ -10,7 +10,7 @@ TODO list:
 - upload the proper repository for easier cloning and testing - Done :)
 - draw lines instead of small squares and compare the results with the current output - Done :)
 - implement pallete with colors (10 colors max) - Done :)
-- implement tool for chosing the size of paintbrush (1px - 5px)
+- implement tool for chosing the size of paintbrush (1px - 5px) - done :)
 - implement eraser tool (10px diameter?)
 - implement button for new clear canvas - Done :)
 - write comments in English

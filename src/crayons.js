@@ -138,6 +138,10 @@ import './crayons.css';
                 <Menu>
                     Tools and colors<br/>
                     <Newbtn onClick={() => this.newPic()} />
+                <div className='eraser'>
+                    <p className='eraserText'>Eraser:</p>
+                    <div className='eraserTool'/>
+                </div>
                 <div className="style">
                     <p className='styleText'>Line width:</p>
                     {this.renderStlBtn(1)}

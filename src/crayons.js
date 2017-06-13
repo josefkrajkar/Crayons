@@ -32,6 +32,11 @@ import './crayons.css';
                 canvas: {},
                 color: 'black',
                 lineWidth: 1,
+                eraser: false,
+                erasing: false,
+                eraserX: '-5px',
+                eraserY: '-5px',
+                eraserVisibility: 'hidden',
             }
         }
 
@@ -47,7 +52,13 @@ import './crayons.css';
         }
 
         handleMove(e) {
-            if (this.state.drawing) {
+            if (this.state.eraser) {
+                /* TODO */
+                if (this.state.erasing) {
+                    /* TODO */
+                }
+            }
+            else if (this.state.drawing) {
                 let x = Math.floor((e.clientX-this.state.rect.left)/(this.state.rect.right-this.state.rect.left)*e.target.width),
                     y = Math.floor((e.clientY-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*e.target.height);
                 let context = this.state.context;
@@ -59,14 +70,21 @@ import './crayons.css';
         }
 
         handleClick(e) {
-            let context = this.state.context;
-            this.setState({
-                drawing: true,
-            });
-            let x = Math.floor((e.clientX-this.state.rect.left)/(this.state.rect.right-this.state.rect.left)*e.target.width),
-                y = Math.floor((e.clientY-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*e.target.height);        
-            context.moveTo(x,y);
-            context.beginPath();
+            if (this.state.eraser) {
+                this.setState({
+                    erasing: true,
+                })
+            }
+            else {
+                let context = this.state.context;
+                this.setState({
+                    drawing: true,
+                });
+                let x = Math.floor((e.clientX-this.state.rect.left)/(this.state.rect.right-this.state.rect.left)*e.target.width),
+                    y = Math.floor((e.clientY-this.state.rect.top)/(this.state.rect.bottom-this.state.rect.top)*e.target.height);        
+                context.moveTo(x,y);
+                context.beginPath();
+            }
         }
 
         changeColor(i) {
@@ -77,12 +95,17 @@ import './crayons.css';
 
         changeWidth(i) {
             this.setState({
-                lineWidth: i,
+                lineWidth: parseInt(i.target.value,10),
             });
         }
 
         endDraw() {
-            if (this.state.drawing) {
+            if (this.state.erasing) {
+                this.setState({
+                    erasing: false,
+                })
+            }
+            else if (this.state.drawing) {
                 let context = this.state.context;
                 this.setState({
                     drawing: false,
@@ -108,22 +131,41 @@ import './crayons.css';
             return <button type='button' className='clrbtn' onClick={() => this.changeColor(i)} style={btnStyle}/>
         }
 
-        renderStlBtn(i) {
-            let btnStyle = {};
-            if (i === this.state.lineWidth) {
-                btnStyle = {
-                    background: 'salmon'
-                }
-            }
-            
-            return <button className='stlBtn' style={btnStyle} type='button' onClick={()=>this.changeWidth(i)}>{i + ' px'}</button>;
-        }
-
         renderInnerSquare() {
             let squareStyle = {
                 background: this.state.color,
             }
             return <div style={squareStyle} className="innerSquare"/>;
+        }
+
+        handleEraser() {
+            this.setState({
+                eraser: !this.state.eraser,
+            });
+        }
+
+        renderEraserMenu() {
+            let eraserStyle = {};
+            if (this.state.eraser) {
+                eraserStyle = {
+                    background: 'red',
+                    color: 'white',
+                }
+            }
+            else {
+                eraserStyle = {
+                    background: 'white',
+                    color: 'black',
+                }
+            }
+            return (<div className='eraser'>
+                    <p className='eraserText'>Eraser:</p>
+                    <div className='eraserTool'>
+                        <div className='eraserInnerSquare' style={eraserStyle} onClick={()=>this.handleEraser()}>
+                            <p className='eraserE'>E</p>
+                        </div>
+                    </div>
+                    </div>);
         }
 
         render() {
@@ -133,16 +175,17 @@ import './crayons.css';
                 onMouseMove={(e) => this.handleMove(e)}
                 onMouseOut={() => this.endDraw()}
                 onMouseUp={() => this.endDraw()}>
-                {this.state.text}
                 </Platno>
                 <Menu>
-                    Tools and colors<br/>
                     <Newbtn onClick={() => this.newPic()} />
+                {this.renderEraserMenu()}
                 <div className="style">
                     <p className='styleText'>Line width:</p>
-                    {this.renderStlBtn(1)}
-                    {this.renderStlBtn(3)}
-                    {this.renderStlBtn(5)}
+                    <select className='styleTool' onChange={(value)=>this.changeWidth(value)}>
+                        <option value='1'>1 px</option>
+                        <option value='3'>3 px</option>
+                        <option value='5'>5 px</option>
+                    </select>
                 </div>
                 <div className="colors">
                                <p className="colorText">Color:</p>

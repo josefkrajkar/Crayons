@@ -24,7 +24,6 @@ body {
     top: 8px;
     left: 30px;
     background: white;
-    cursor: crosshair;
 }
 .menu {
     width: 90%;
@@ -42,7 +41,6 @@ body {
     top: 8px;
     left: 30px;
     background: white;
-    cursor: crosshair;
 }
 .newbtn {
     cursor: pointer;
@@ -159,4 +157,12 @@ body {
     position: relative;
     left: 0;
     top: 3px;
+}
+.guma {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #999;
+    background: white;
+    position: relative;
+    cursor: none;
 }

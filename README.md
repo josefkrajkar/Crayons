@@ -8,11 +8,12 @@ React library for "Paintbrush" component.
 
 TODO list:
 - upload the proper repository for easier cloning and testing - Done :)
-- draw lines instead of small squares and compare the results with the current output - Done :)
-- implement pallete with colors (10 colors max) - Done :)
-- implement tool for chosing the size of paintbrush (1px - 5px) - Done :)
-- implement eraser tool (10px diameter?)
+- draw lines instead of small squares - Done :)
+- implement pallete with colors - Done :)
+- implement tool for chosing the size of paintbrush - Done :)
+- implement eraser tool - Done :)
 - implement button for new clear canvas - Done :)
+- implement time traveling (Undo button)
 - write comments in English
 - use flow
 - write unit tests with jest and enzyme 

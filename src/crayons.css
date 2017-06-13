@@ -55,6 +55,7 @@ body {
 .colors {
     padding: 5px;
     width: 175px;
+    height: 50px;
     border: 1px solid #999;
     position: absolute;
     top: 5px;
@@ -92,7 +93,7 @@ body {
     -webkit-user-select: none;
 }
 .styleText {
-    padding: 3px;
+    padding: 0px;
     margin: 0;
     cursor: default;
     -moz-user-select: none;
@@ -100,17 +101,17 @@ body {
 }
 .style {
     padding: 5px;
-    width: 130px;
+    width: 100px;
     height: 50px;
     border: 1px solid #999;
     position: absolute;
     top: 5px;
-    left: 198px;
+    left: 227px;
+    text-align: center;
 }
-.stlBtn {
-    margin: 1px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
+.styleTool {
+    width: 60px;
+    height: 30px;
     cursor: pointer;
 }
 .eraser {
@@ -119,9 +120,14 @@ body {
     border: 1px solid #999;
     width: 70px;
     height: 50px;
+    padding: 5px;
+    top: 5px;
+    position: absolute;
+    left: 138px;
+    text-align: center;
 }
 .eraserText {
-    padding: 3px;
+    padding: 0;
     margin: 0;
     cursor: default;
     -moz-user-select: none;
@@ -131,4 +137,26 @@ body {
     border: 1px solid #999;
     -moz-user-select: none;
     -webkit-user-select: none;
+    border: 1px solid #999;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 0px;
+    left: 20px;
+}
+.eraserInnerSquare {
+    border: 1px solid #999;
+    width: 24px;
+    height: 24px;
+    left: 2px;
+    top: 2px;
+    position: absolute;
+    cursor: pointer;   
+}
+.eraserE {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    left: 0;
+    top: 3px;
 }

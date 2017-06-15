@@ -2,13 +2,13 @@ body {
     margin: 0;
     padding: 0;
 }
-.area {
+div.area {
     width: 600px;
     height: 480px;
     border: 1px solid #999;
     position: absolute;
 }
-.shadow {
+div.shadow {
     width: 90%;
     height: 80%;
     position: absolute;
@@ -16,7 +16,7 @@ body {
     left: 35px;
     background: grey;
 }
-.paper {
+div.paper {
     width: 90%;
     height: 80%;
     border: 1px solid #999;
@@ -25,7 +25,7 @@ body {
     left: 30px;
     background: white;
 }
-.menu {
+div.menu {
     width: 90%;
     height: 15%;
     border: 1px solid #999;
@@ -33,7 +33,7 @@ body {
     top: 400px;
     left: 30px;
 }
-.platno {
+canvas.platno {
     width: 90%;
     height: 80%;
     border: 1px solid #999;
@@ -42,15 +42,12 @@ body {
     left: 30px;
     background: white;
 }
-.newbtn {
-    cursor: pointer;
-}
-.clrbtn {
+button.clrbtn {
     cursor: pointer;
     height: 25px;
     width: 25px;
 }
-.colors {
+div.colors {
     padding: 5px;
     width: 175px;
     height: 50px;
@@ -59,13 +56,13 @@ body {
     top: 5px;
     left: 345px;
 }
-.palette {
+div.palette {
     top: 3px;
     left: 50px;
     padding: 0px;
     position: absolute;
 }
-.outerSquare {
+div.outerSquare {
     border: 1px solid #999;
     width: 30px;
     height: 30px;
@@ -73,7 +70,7 @@ body {
     top: 0px;
     left: 5px;
 }
-.innerSquare {
+div.innerSquare {
     border: 1px solid #999;
     width: 24px;
     height: 24px;
@@ -83,21 +80,21 @@ body {
     top: 2px;
     position: absolute;
 }
-.colorText {
+p.colorText {
     padding: 0;
     margin: 0;
     cursor: default;
     -moz-user-select: none;
     -webkit-user-select: none;
 }
-.styleText {
+p.styleText {
     padding: 0px;
     margin: 0;
     cursor: default;
     -moz-user-select: none;
     -webkit-user-select: none;
 }
-.style {
+div.style {
     padding: 5px;
     width: 100px;
     height: 50px;
@@ -107,12 +104,12 @@ body {
     left: 227px;
     text-align: center;
 }
-.styleTool {
+select.styleTool {
     width: 60px;
     height: 30px;
     cursor: pointer;
 }
-.eraser {
+div.eraser {
     -moz-user-select: none;
     -webkit-user-select: none;
     border: 1px solid #999;
@@ -124,14 +121,14 @@ body {
     left: 138px;
     text-align: center;
 }
-.eraserText {
+p.eraserText {
     padding: 0;
     margin: 0;
     cursor: default;
     -moz-user-select: none;
     -webkit-user-select: none;
 }
-.eraserTool {
+div.eraserButton {
     border: 1px solid #999;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -142,7 +139,7 @@ body {
     top: 0px;
     left: 20px;
 }
-.eraserInnerSquare {
+div.eraserInnerSquare {
     border: 1px solid #999;
     width: 24px;
     height: 24px;
@@ -151,18 +148,45 @@ body {
     position: absolute;
     cursor: pointer;   
 }
-.eraserE {
+p.eraserE {
     padding: 0;
     margin: 0;
     position: relative;
     left: 0;
     top: 3px;
 }
-.guma {
+div.eraserTool {
     width: 20px;
     height: 20px;
     border: 1px solid #999;
     background: white;
     position: relative;
     cursor: none;
+}
+div.newMenu {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    border: 1px solid #999;
+    width: 113px;
+    height: 50px;
+    padding: 5px;
+    top: 5px;
+    position: absolute;
+    left: 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+p.newText {
+    padding: 0;
+    margin: 0;
+    cursor: default;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+button.newButton {
+    position: relative;
+    top: 1px;
+    padding: 3px 15px 3px 15px;
+    color: red;
+    cursor: pointer;
 }

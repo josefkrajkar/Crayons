@@ -13,8 +13,8 @@ TODO list:
 - implement tool for chosing the size of paintbrush - Done :)
 - implement eraser tool - Done :)
 - implement button for new clear canvas - Done :)
-- implement time traveling (Undo button)
-- write comments in English
-- use flow
-- write unit tests with jest and enzyme 
+- write comments in English - Done :)
+- use Flow
+- write unit tests with Jest and Enzyme 
 - write proper readme file :)
+- implement time traveling (Undo button)

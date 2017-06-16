@@ -14,7 +14,7 @@ TODO list:
 - implement eraser tool - Done :)
 - implement button for new clear canvas - Done :)
 - write comments in English - Done :)
-- use Flow
+- use Flow - Done :)
 - write unit tests with Jest and Enzyme 
 - write proper readme file :)
 - implement time traveling (Undo button)

@@ -15,7 +15,7 @@ function Platno(props) {
 
 //functional component for the eraser cursor
 function Erasertool(props) {
-    let stats: {top: number, left: number, visibility: string} = {
+    let stats = {
         top: props.y,
         left: props.x,
         visibility: props.visibility,
@@ -51,25 +51,69 @@ class Crayons extends Component {
         eraserX: string,
         eraserY: string,
         eraserVisibility: string,
+        context: {
+            stroke: Function,
+            strokeStyle: string,
+            clearRect: Function,
+            beginPath: Function,
+            moveTo: Function,
+            lineTo: Function,
+            lineWidth: number
+        },
+        canvas: {
+            height: number,
+            width: number,
+        },
+        rect: {
+            top: number,
+            bottom: number,
+            left: number,
+            right: number,
+        },
         cursorStyle: {
             cursor: string,
-        },
-        context: {},
-        rect: {},
-        canvas: {}
+        }
+    }
+    squareStyle: {
+        background: string,
+    }
+    eraserStyle: {
+        background: string,
+        color: string
+    }
+    stats: {
+        top: number,
+        left: number,
+        visibility: string
     }
 
     //constructor method with "declaration" of the state property
     constructor() {
         super();
         this.state = {
+            context: {
+                strokeStyle: '',
+                lineWidth: 1,
+                stroke: Function,
+                moveTo: Function,
+                lineTo: Function,
+                clearRect: Function,
+                beginPath: Function,
+            },
+            canvas: {
+                height: 0,
+                width: 0,
+            },
+            rect: {
+                top: 0,
+                right: 0,
+                left: 0,
+                bottom: 0
+            },
             cursorStyle: {
                 cursor: 'crosshair',
             },
             drawing: false,
-            context: {},
-            rect: {},
-            canvas: {},
             color: 'black',
             lineWidth: 1,
             eraser: false,
@@ -77,17 +121,17 @@ class Crayons extends Component {
             eraserX: '5px',
             eraserY: '5px',
             eraserVisibility: 'hidden',
-        }
+            }
     }
 
     //when component mounts, the canvas and context properties are set to the state 
     componentDidMount() {
-        let canvas: {} = document.getElementById("canvas1");
-        if (this.state.canvas != null) {
+        let canvas_handler: ?Object = document.getElementById('canvas1');
+        if (canvas_handler != null) {
             this.setState({
-                canvas: canvas,
-                context: canvas.getContext('2d'),
-                rect: canvas.getBoundingClientRect(),
+                canvas: canvas_handler,
+                context: canvas_handler.getContext('2d'),
+                rect: canvas_handler.getBoundingClientRect(),
             });
         }
     }
@@ -96,21 +140,21 @@ class Crayons extends Component {
     handleMove(e: MouseEvent) {
         if (this.state.eraser) {
             this.setState({
-                eraserX: e.clientX,
-                eraserY: e.clientY,
+                eraserX: e.clientX + '',
+                eraserY: e.clientY + '',
                 eraserVisibility: 'visible',
             })
             if (this.state.erasing) {
-                let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * e.target.width),
-                    y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * e.target.height);
-                let context: {} = this.state.context;
-                context.clearRect(x+1,y+1,12,9);
+                let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * this.state.canvas.width),
+                    y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * this.state.canvas.height);
+                let context: {clearRect: Function} = this.state.context;
+                context.clearRect(x + 1, y + 1, 12, 9);
             }
         }
         else if (this.state.drawing) {
-            let x:number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * e.target.width),
-                y:number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * e.target.height);
-            let context: {} = this.state.context;
+            let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * this.state.canvas.width),
+                y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * this.state.canvas.height);
+            let context: {stroke: Function, lineTo: Function, lineWidth: number, strokeStyle: string} = this.state.context;
             context.strokeStyle = this.state.color;
             context.lineWidth = this.state.lineWidth;
             context.lineTo(x, y);
@@ -124,18 +168,18 @@ class Crayons extends Component {
             this.setState({
                 erasing: true,
             });
-            let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * e.target.width),
-                y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * e.target.height);
-            let context: {} = this.state.context;
-            context.clearRect(x+1,y+1,12,8);
+            let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * this.state.canvas.width),
+                y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * this.state.canvas.height);
+            let context = this.state.context;
+            context.clearRect(x + 1, y + 1, 12, 8);
         }
         else {
-            let context: {} = this.state.context;
+            let context = this.state.context;
             this.setState({
                 drawing: true,
             });
-            let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * e.target.width),
-                y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * e.target.height);
+            let x: number = Math.floor((e.clientX - this.state.rect.left) / (this.state.rect.right - this.state.rect.left) * this.state.canvas.width),
+                y: number = Math.floor((e.clientY - this.state.rect.top) / (this.state.rect.bottom - this.state.rect.top) * this.state.canvas.height);
             context.moveTo(x, y);
             context.beginPath();
         }
@@ -149,7 +193,7 @@ class Crayons extends Component {
     }
 
     //method for changing the width of a line
-    changeWidth(i: string) {
+    changeWidth(i: {target: {value: string}}) {
         this.setState({
             lineWidth: parseInt(i.target.value, 10),
         });
@@ -163,7 +207,7 @@ class Crayons extends Component {
             })
         }
         else if (this.state.drawing) {
-            let context: {} = this.state.context;
+            let context = this.state.context;
             this.setState({
                 drawing: false,
             });
@@ -180,7 +224,7 @@ class Crayons extends Component {
             })
         }
         else if (this.state.drawing) {
-            let context: {} = this.state.context;
+            let context = this.state.context;
             this.setState({
                 drawing: false,
             });
@@ -190,8 +234,8 @@ class Crayons extends Component {
 
     //method called when the "New" button is clicked - after confirmation will clear the canvas
     newPic() {
-        if(confirm("Clear the canvas?")===true) {
-            let context: {} = this.state.context;
+        if (confirm("Clear the canvas?") === true) {
+            let context = this.state.context;
             context.clearRect(0, 0, this.state.canvas.width, this.state.canvas.height);
         }
     }
@@ -212,9 +256,6 @@ class Crayons extends Component {
 
     //method rendering square with the chosen color
     renderInnerSquare() {
-        squareStyle: {
-            background: string,
-        }
         let squareStyle = {
             background: this.state.color,
         }
@@ -234,10 +275,6 @@ class Crayons extends Component {
 
     //method rendering the eraser part of the menu 
     renderEraserMenu() {
-        eraserStyle: {
-            background: string,
-            color: string
-        }
         let eraserStyle = {};
         if (this.state.eraser) {
             eraserStyle = {
@@ -281,7 +318,7 @@ class Crayons extends Component {
                 {this.renderEraserMenu()}
                 <div className="style">
                     <p className='styleText'>Line width:</p>
-                    <select className='styleTool' onChange={(value) => this.changeWidth(value)}>
+                    <select className='styleTool' onChange={(value)=>this.changeWidth(value)}>
                         <option value='1'>1 px</option>
                         <option value='3'>3 px</option>
                         <option value='5'>5 px</option>
